@@ -1,0 +1,2 @@
+deploy:
+  artifact: target/my-jetty-app.jar

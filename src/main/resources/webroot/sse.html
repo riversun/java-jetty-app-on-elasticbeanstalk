@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Server Sent Evnet(SSE) Example</h1>
+・PUSH通知をうけとってメッセージを表示します<br>
+・PUSH送信は↓のフォームから実行できます<br>
+・別のブラウザでこのページを開いても、BroadcastするのにPUSH通知を受け取れます
+<hr>
+<h3>PUSH送信するメッセージ</h3>
+<input id="text_message" value="テストメッセージ">
+<button id="send_message">PUSH送信</button>
+（エンターでもOK)
+<br>
+<br>
+<small>（他のブラウザを開いても↓のメッセージが受信される）</small>
+<hr>
+<h3>Server PUSHを受信したメッセージ</h3>
+<div id="messages"></div>
+<script>
+
+    const eventSource = new EventSource('sse');//http://localhost:8080/sse
+    const msgContent = document.querySelector('#messages');
+    eventSource.addEventListener('message', (event) => {
+        window.console.info('SSE: ' + event.data);
+        msgContent.innerHTML += event.data + '<br>';
+    });
+    const msgText = document.querySelector('#text_message');
+    const msgPostBtn = document.querySelector('#send_message');
+
+    const funcSendData = (event) => {
+        postMessage('sse', {message: msgText.value});
+    };
+    msgText.addEventListener('keypress', function (event) {
+
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            funcSendData(event);
+        }
+    });
+
+    msgPostBtn.addEventListener('click', funcSendData);
+
+
+    function postMessage(url, data) {
+        const queryParams = [];
+        for (let key in data) {
+            queryParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`);
+        }
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('post', url);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(queryParams.join('&').replace(/%20/g, '+'));
+    }
+</script>
+</body>
+</html>
