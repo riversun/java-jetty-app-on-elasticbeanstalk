@@ -10,7 +10,7 @@
 <title>Example</title>
 </head>
 <body>
-	<h1>Jetty Webアプリケーションのサンプル</h1>
+	<h1>Jetty Webアプリケーションのサンプル1</h1>
 
 	<h3>JSPサンプル</h3>
 	<a href="show">サーブレット→JSPを表示する</a>

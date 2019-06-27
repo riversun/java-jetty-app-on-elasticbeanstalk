@@ -144,28 +144,45 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<finalName>my-jetty-app</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<!-- make sure main class doesn't "extend" a class -->
-							<mainClass>myserver.StartServer</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
 				<executions>
 					<execution>
+						<id>package-jar</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>
 						</goals>
+						<configuration>
+							<!-- This must be set as false so as to override the original jar 
+								file. -->
+							<appendAssemblyId>false</appendAssemblyId>
+							<archive>
+								<manifest>
+									<mainClass>myserver.StartServer</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+					<execution>
+						<id>package-zip</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/zip.xml</descriptor>
+							</descriptors>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+
+
+
 		</plugins>
 		<resources>
 			<resource>
