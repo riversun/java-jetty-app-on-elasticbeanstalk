@@ -1,20 +1,2 @@
-branch-defaults:
-  master:
-    environment: my-jetty-app3
-    group_suffix: null
 deploy:
   artifact: target/my-jetty-app-1.0.0.zip
-global:
-  application_name: my-eb-app
-  branch: null
-  default_ec2_keyname: null
-  default_platform: java-8
-  default_region: ap-northeast-1
-  include_git_submodules: true
-  instance_profile: null
-  platform_name: null
-  platform_version: null
-  profile: eb-cli
-  repository: null
-  sc: git
-  workspace_type: Application
