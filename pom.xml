@@ -16,15 +16,12 @@
 	</properties>
 
 	<dependencies>
-
-
 		<!-- for server -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-annotations</artifactId>
@@ -48,35 +45,26 @@
 			<version>${jetty-version}</version>
 			<type>pom</type>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.9</version>
 		</dependency>
-
-
 	</dependencies>
-
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-
 				<configuration>
-
 					<source>1.8</source>
 					<target>1.8</target>
-
 					<excludes>
 						<exclude>examples/**/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -99,27 +87,6 @@
 					<additionalJOption>-J-Duser.language=en</additionalJOption>
 				</configuration>
 			</plugin>
-
-
-
-			<!-- for "mvn exec:java" on command line -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.6.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>java</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<mainClass>myserver.StartServer</mainClass>
-
-				</configuration>
-			</plugin>
-
 			<!-- add source folders -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -139,12 +106,11 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!-- one jar -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
+					<!-- ソースコードをfat-jar化する -->
 					<execution>
 						<id>package-jar</id>
 						<phase>package</phase>
@@ -152,8 +118,6 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<!-- This must be set as false so as to override the original jar 
-								file. -->
 							<appendAssemblyId>false</appendAssemblyId>
 							<archive>
 								<manifest>
@@ -165,6 +129,7 @@
 							</descriptorRefs>
 						</configuration>
 					</execution>
+					<!-- Elastic Beanstalkにアップロードするzip(fat.jarや関連ファイルを含む)を作成する -->
 					<execution>
 						<id>package-zip</id>
 						<phase>package</phase>
@@ -180,17 +145,11 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-
 		</plugins>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-
 	</build>
-
-
 </project>
