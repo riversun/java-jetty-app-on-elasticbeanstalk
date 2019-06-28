@@ -124,6 +124,7 @@
 									<mainClass>myserver.StartServer</mainClass>
 								</manifest>
 							</archive>
+							<finalName>${artifactId}</finalName>
 							<descriptorRefs>
 								<descriptorRef>jar-with-dependencies</descriptorRef>
 							</descriptorRefs>
@@ -138,6 +139,7 @@
 						</goals>
 						<configuration>
 							<appendAssemblyId>false</appendAssemblyId>
+							<finalName>${artifactId}</finalName>
 							<descriptors>
 								<descriptor>src/main/assembly/zip.xml</descriptor>
 							</descriptors>

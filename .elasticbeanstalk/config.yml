@@ -1,2 +1,2 @@
 deploy:
-  artifact: target/my-jetty-app-1.0.0.zip
+  artifact: target/my-jetty-app.zip
