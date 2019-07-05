@@ -118,7 +118,7 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
+							<appendAssemblyId>true</appendAssemblyId>
 							<archive>
 								<manifest>
 									<mainClass>myserver.StartServer</mainClass>
@@ -138,7 +138,7 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
+							<appendAssemblyId>true</appendAssemblyId>
 							<finalName>${artifactId}</finalName>
 							<descriptors>
 								<descriptor>src/main/assembly/zip.xml</descriptor>
