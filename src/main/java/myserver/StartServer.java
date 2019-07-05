@@ -52,7 +52,8 @@ public class StartServer {
         jettyServer.setConnectors(new Connector[] { httpConnector });
 
         // JSPのコンパイル結果を保存する位置ディレクトリを作る
-        final File jspOutputDir = new File(new File(System.getProperty("java.io.tmpdir")).toString(), "jsp");
+        final File jspOutputDir = new File(new File(System.getProperty("java.io.tmpdir")).toString(), "my_jsp_temp");
+        jspOutputDir.mkdir();
 
         JspInitiallizer.enableJSP(jettyServer, jspOutputDir, "webroot");
 
